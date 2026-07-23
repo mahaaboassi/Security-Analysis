@@ -157,3 +157,22 @@ Learn more about the power of Turborepo:
 - [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
 - [Configuration Options](https://turborepo.dev/docs/reference/configuration)
 - [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+
+
+
+
+The standard interfaces 
+1- Description about this app
+2- Login (username- password)
+3- Profile ( Get All Information the authorization is required)
+
+Apis 
+POST /auth/login  parmas => returnedCookie (0,1)
+GET /auth/profile
+
+DB
+PostgreSQL
+
+ORM 
+Prisma
+
