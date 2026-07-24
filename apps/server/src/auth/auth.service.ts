@@ -46,6 +46,7 @@ export class AuthService {
     if (user) throw new UnprocessableEntityException('Username already in use');
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
+
     const newUser = await this.prisma.user.create({
       data: {
         ...dto,

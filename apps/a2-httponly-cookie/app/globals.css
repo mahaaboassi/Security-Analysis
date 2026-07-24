@@ -1,9 +1,22 @@
 @import "tailwindcss";
 @source "../../../packages/ui/src";
-
+@theme {
+  --breakpoint-xxs: 400px;
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --main: #1a2744;
+  --grey-light: #ffffffb3;
+  --bg-light-grey: #ffffff26;
+  --secondary: #4b5563;
+  --hint: #9ca3af;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,33 +33,31 @@ body {
 }
 
 body {
-  color: var(--background);
+  color: var(--main);
   background: var(--foreground);
 }
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+p{
+  color: var(--secondary)
+}
 a {
-  color: inherit;
+  color: var(--grey-light);
   text-decoration: none;
 }
-
-.imgDark {
-  display: none;
+a:hover{
+  color: white
 }
+
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 
-  .imgLight {
-    display: none;
-  }
-  .imgDark {
-    display: unset;
-  }
 }

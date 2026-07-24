@@ -10,7 +10,7 @@ async function bootstrap() {
   // 
   app.use(cookieParser());
   app.enableCors({
-    origin: ['https://localhost:3000', 'https://localhost:3001', 'https://localhost:3002'],
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
     credentials: true,
   });
   app.useGlobalFilters(new GlobalExceptionFilter());

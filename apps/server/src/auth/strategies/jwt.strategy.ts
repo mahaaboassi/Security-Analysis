@@ -13,6 +13,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       //   },
       // ]),
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Get Token from Bearer 
+      // jwtFromRequest: ExtractJwt.fromExtractors([
+      //   (req: any) => {
+      //     console.log("Authorization header:", req.headers.authorization);
+
+      //     return req.headers.authorization?.replace("Bearer ", "");
+      //   },
+      // ]),
       secretOrKey: process.env.JWT_SECRET || 'secret',
     });
   }
