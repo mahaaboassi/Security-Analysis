@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import crypto from "crypto";
+import { cookies } from "next/headers";
 import redis from "../../../lib/redis";
 //Shared components
 import { Helper } from "@repo/utils/src/helper";
-import { cookies } from "next/headers";
+
 
 export async function GET(req: Request) {
     
@@ -11,7 +11,6 @@ export async function GET(req: Request) {
     const cookieStore = await cookies();
 
     const sessionId = cookieStore.get("sessionId")?.value;
-    console.log("1", sessionId)
     if (!sessionId) {
         return NextResponse.json(
             { 
@@ -41,7 +40,7 @@ export async function GET(req: Request) {
         method: "GET",
         token: accessToken
     });
-console.log("1", result)
+
     const response = NextResponse.json(result, {
         status: result.status,
     });

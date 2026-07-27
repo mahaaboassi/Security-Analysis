@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import crypto from "crypto";
 import redis from "../../../lib/redis";
 //Shared components
 import { Helper } from "@repo/utils/src/helper";
-import { cookies } from "next/headers";
+
 
 export async function POST(req: Request) {
     
@@ -13,7 +14,6 @@ export async function POST(req: Request) {
         method: "POST",
         body, 
     });
-    console.log("******",result);
 
     let dataReturned = result
     // extract Token from result

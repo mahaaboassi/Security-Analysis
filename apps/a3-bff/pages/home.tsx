@@ -55,16 +55,23 @@ const HomeClientPage = ()=>{
             isInclude: true,
             method: "GET"
         })  
-        console.log("*******A333 22222*******", res);
         if(res.err == 1){
             setResult({msg: res.msg, type: "error"})
         }else{
             setProfile(res.data)
         }
     }
-    const logout = ()=>{
-        setProfile({})
-        localStorage.removeItem("accessToken")
+    const logout = async()=>{
+        const res = await Helper({
+            url: "http://localhost:3000/api/logout",
+            isInclude: true,
+            method: "GET"
+        })  
+        if(res == 1 ){
+            setResult({msg: res.msg, type: "error"})
+        }else{
+            setProfile({})
+        }
     }
     return(<div className="!space-y-4">
         {result.msg && <div className={`text-center !p-2 ${result.type === "error" ? "rounded border text-red-500 border-red-500" : ""}`}>

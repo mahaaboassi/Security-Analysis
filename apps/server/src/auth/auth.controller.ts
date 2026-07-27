@@ -32,7 +32,8 @@ export class AuthController {
     return this.authService.loginWithCookie(dto,res);
   }
   
-  @Post('logout')
+  @UseGuards(JwtAuthGuardCookie)
+  @Get('logout')
   logout(@Res({ passthrough: true }) res: Response) {
     return this.authService.logout(res);
   }
