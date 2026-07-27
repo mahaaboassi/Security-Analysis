@@ -13,7 +13,7 @@
   --background: #ffffff;
   --foreground: #171717;
   --main: #1a2744;
-  --main-hight: #4d5872;
+  --main-light: #4d5872;
   --grey-light: #ffffffb3;
   --bg-light-grey: #ffffff26;
   --secondary: #4b5563;
@@ -64,7 +64,7 @@ button{
   transition: 0.3s;
 }
 button:hover{
-  background-color: var(--main-hight);
+  background-color: var(--main-light);
 }
 input{
   border: 1px solid var(--hint);
@@ -76,6 +76,7 @@ input{
 button.outline{
   border: var(--main);
   color: var(--main);
+  background: var(--grey-light);
   padding: 5px;
   border-radius: 8px;
   font-size: 16px;
@@ -83,7 +84,7 @@ button.outline{
   transition: 0.3s;
 }
  button.outline:hover{
-  background-color: var(--main-hight);
+  background-color: var(--main-light);
 }
 @media (prefers-color-scheme: dark) {
   html {

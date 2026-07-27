@@ -2,16 +2,18 @@ type Props = {
     url: string,
     body?: any,
     token?: string,
-    method: string
+    method: string,
+    isInclude?: boolean
 }
-export const Helper = async({url, body, token, method}:Props)=>{
+export const Helper = async({url, body, token, method, isInclude}:Props)=>{
     try{
         const response = await fetch(url,{
             method: method,
             headers: {
                 'content-type': "application/json",
-                ...(token && {'authorization': `Bearer ${token}`})
+                ...(token && {'authorization': `Bearer ${token}`}),
             },
+            credentials: isInclude ? "include" : "same-origin",
             body: JSON.stringify(body)
         })
 

@@ -4,15 +4,15 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy,"jwt") {
+export class JwtCookieStrategy extends PassportStrategy(Strategy,"jwt-cookie") {
   constructor() {
     super({
-      // jwtFromRequest: ExtractJwt.fromExtractors([
-      //   (req: Request) => {
-      //     return req?.cookies?.accessToken; //  Get Token from Cookies
-      //   },
-      // ]),
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Get Token from Bearer 
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (req: Request) => {
+          return req?.cookies?.accessToken; //  Get Token from Cookies
+        },
+      ]),
+      // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Get Token from Bearer 
       // jwtFromRequest: ExtractJwt.fromExtractors([
       //   (req: any) => {
       //     console.log("Authorization header:", req.headers.authorization);

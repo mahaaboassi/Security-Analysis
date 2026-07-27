@@ -29,17 +29,16 @@ const HomeClientPage = ()=>{
         console.log(data);
         setIsSubmit(true)
         const res = await Helper({
-            url: "http://localhost:5000/auth/login",
+            url: "http://localhost:5000/auth/login/cookie",
             body: data,
+            isInclude: true,
             method: "POST"
         })  
-        console.log("*******res*******", res);
         if(res){
             if(res.err == 1){
                 setResult({msg: res.msg, type: "error"})
             }else{
-                localStorage.setItem("accessToken",res.data.accessToken)
-                getProfile(res.data.accessToken)
+                getProfile()
             }
             
         }else{
@@ -48,13 +47,12 @@ const HomeClientPage = ()=>{
  
         setIsSubmit(false)
     }
-    const getProfile = async(token:any)=>{
+    const getProfile = async()=>{
         const res = await Helper({
-            url: "http://localhost:5000/auth/me",
-            token: token,
+            url: "http://localhost:5000/auth/me/cookie",
+            isInclude: true,
             method: "GET"
         })  
-        console.log("*******22222*******", res);
         if(res.err == 1){
             setResult({msg: res.msg, type: "error"})
         }else{
@@ -63,7 +61,9 @@ const HomeClientPage = ()=>{
     }
     const logout = ()=>{
         setProfile({})
-        localStorage.removeItem("accessToken")
+        const res = document.cookie
+        console.log("res",res);
+        
     }
     return(<div className="!space-y-4">
         {result.msg && <div className={`text-center !p-2 ${result.type === "error" ? "rounded border text-red-500 border-red-500" : ""}`}>

@@ -38,6 +38,38 @@ export class AuthService {
       accessToken: token,
     };
   }
+
+  
+  async loginWithCookie(dto: LoginDto, res: Response) {
+    const user = await this.prisma.user.findUnique({
+      where: { username: dto.username },
+    });
+
+    if (!user) throw new UnauthorizedException('Invalid credentials');
+
+    const valid = await bcrypt.compare(dto.password, user.password);
+    if (!valid) throw new UnauthorizedException('Invalid credentials');
+
+    const token = this.jwt.sign({
+      sub: user.id,
+      username: user.username,
+    });
+    res.cookie('accessToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",        // production only (HTTPS)
+      sameSite: 'lax',
+      path: '/',
+    });
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      username: user.username,
+      address: user.address,
+      file: user.file,
+    };
+  }
+
   async register(dto: RegisterDto, res: Response) {
     const user = await this.prisma.user.findUnique({
       where: { username: dto.username },
@@ -67,5 +99,16 @@ export class AuthService {
       file: newUser.file,
       accessToken: token,
     };
+  }
+
+  async logout(res: Response) {
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: 'lax',
+      path: '/',
+    });
+
+    return 
   }
 }
