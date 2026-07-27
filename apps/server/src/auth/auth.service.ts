@@ -27,7 +27,7 @@ export class AuthService {
       sub: user.id,
       username: user.username,
     });
-
+    
     return {
       id: user.id,
       name: user.name,
@@ -35,8 +35,8 @@ export class AuthService {
       username: user.username,
       address: user.address,
       file: user.file,
-      accessToken: token,
-    };
+      accessToken: token
+    }
   }
 
   

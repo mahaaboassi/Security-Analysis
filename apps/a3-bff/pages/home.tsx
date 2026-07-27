@@ -2,7 +2,7 @@
 import { LoginForm } from "@repo/ui/login"
 import Profile from "@repo/ui/profile"
 import { Helper } from "@repo/utils/src/helper"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 type Props = {
     username: string,
@@ -28,18 +28,19 @@ const HomeClientPage = ()=>{
     const onSubmit = async(data:Props)=>{
         console.log(data);
         setIsSubmit(true)
-        const res = await Helper({
-            url: "http://localhost:5000/auth/login",
-            body: data,
-            method: "POST"
-        })  
-        console.log("*******res*******", res);
+        const result = await fetch("http://localhost:3000/api/login",{
+            method: "POST",
+            body: JSON.stringify(data),
+            credentials: "include"
+        })
+        const res = await result.json()
+        console.log("A3 login client side", res)
         if(res){
             if(res.err == 1){
                 setResult({msg: res.msg, type: "error"})
             }else{
-                localStorage.setItem("accessToken",res.data.accessToken)
-                getProfile(res.data.accessToken)
+                
+                getProfile()
             }
             
         }else{
@@ -48,13 +49,13 @@ const HomeClientPage = ()=>{
  
         setIsSubmit(false)
     }
-    const getProfile = async(token:any)=>{
+    const getProfile = async()=>{
         const res = await Helper({
-            url: "http://localhost:5000/auth/me",
-            token: token,
+            url: "http://localhost:3000/api/me",
+            isInclude: true,
             method: "GET"
         })  
-        console.log("*******22222*******", res);
+        console.log("*******A333 22222*******", res);
         if(res.err == 1){
             setResult({msg: res.msg, type: "error"})
         }else{
