@@ -46,7 +46,6 @@ const HomeClientPage = ()=>{
         }else{
             setResult({msg: "Something is wrong", type: "error"})
         }
- 
         setIsSubmit(false)
     }
     const getProfile = async()=>{

@@ -2,7 +2,7 @@
 import { LoginForm } from "@repo/ui/login"
 import Profile from "@repo/ui/profile"
 import { Helper } from "@repo/utils/src/helper"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 type Props = {
     username: string,

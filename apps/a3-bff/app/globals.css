@@ -35,7 +35,7 @@ body {
 
 body {
   color: var(--main);
-  background: var(--foreground);
+  background: var(--background);
 }
 
 * {
